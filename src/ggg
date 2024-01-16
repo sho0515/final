@@ -1,0 +1,127 @@
+<?php
+    require 'db-connect.php'
+?>
+
+<DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            margin-bottom: 20px;
+
+            padding: 15px;
+            border-radius: 5px;
+
+        }
+
+        select, button {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .insert-button {
+            margin-top: 20px;
+        }
+
+        .insert-button button {
+            background-color: #3498db;
+        }
+
+        .insert-button button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body> 
+<button onclick="location.href='store-info.php'">トップへ戻る</button>
+    <?php
+        $pdo = new PDO($connect, USER, PASS);
+        $sql=$pdo->prepare('insert into store(store_id, name, c_id, yosan) values(?, ?, ?, ?)');
+        if(!preg_match('/^\d+$/',$_POST['store_id'])) {
+            echo '店舗番号を入力して下さい。';
+        }else if(empty($_POST['name'])){
+            echo '店舗名を入力してください。';
+        }else if(empty($_POST['c_id'])){
+            echo 'カテゴリを入力してください。';
+        }else if(!preg_match('/^[0-9]+$/', $_POST['yosan'])) {
+            echo '商品価格を整数で入力してください。';
+        }else if($sql->execute([$_POST['store_id'], $_POST['name'],$_POST['c_id'],$_POST['yosan'] ])){
+            echo '<font color="red">店舗情報の追加に成功しました。</font>';
+        }else{
+            echo '<font color="red">店舗情報の追加に失敗しました。</font>';
+        }
+
+    ?>
+    <br><hr><br>
+    <table>
+        <tr><th>商品番号</th><th>商品名</th><th>カテゴリ</th><th>価格</th></tr>
+    <?php
+        foreach($pdo -> query('SELECT store.store_id, store.name, Category.category, store.yosan
+        FROM store
+        LEFT JOIN Category ON store.c_id = Category.c_id') as $row){
+            echo '<tr>';
+            echo '<td>',$row['store_id'],'</td>';
+            echo '<td>',$row['name'],'</td>';
+            echo '<td>',$row['category'],'</td>';
+            echo '<td>',$row['yosan'], '</td>';
+            echo '</tr>';
+            echo "\n";
+        }
+    ?>
+    </table>
+
+</body>
+</html>

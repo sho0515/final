@@ -49,7 +49,7 @@
         echo '<td>',$row['store_id'] ,'</td>';
         echo '<td>',$row['name'] ,'</td>';
         echo '<td>',$row['category'] ,'</td>';
-        echo '<td>',$row['yosan'] ,'</td>';
+        echo '<td>￥', number_format($row['yosan']), '</td>';
         echo '<tr>';
     }
 ?> 

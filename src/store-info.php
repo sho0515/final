@@ -13,7 +13,7 @@
     <h1>店舗情報一覧</h1>
     
     <form action="search.php" method="post">
-        カテゴリ：<select name="category">
+        カテゴリ：<select name="category" style="height: 30px";>
         <option value="null" selected hidden>選択してください</option>
         <?php
             $pdo = new PDO($connect, USER, PASS);
@@ -23,7 +23,7 @@
             }
         ?>
         </select>
-        予算目安：<select name="yosan">
+        予算目安：<select name="yosan" style="height: 30px";>
             <option value="1000000" selected hidden>選択してください</option>
             <option value="1000">1,000円以内</option>
             <option value="3000">3,000円以内</option>
@@ -46,7 +46,7 @@
             echo '<td>',$row['store_id'] ,'</td>';
             echo '<td>',$row['name'] ,'</td>';
             echo '<td>',$row['category'] ,'</td>';
-            echo '<td>',$row['yosan'],'</td>';
+            echo '<td>￥', number_format($row['yosan']), '</td>';
             echo '<td>';
             echo '<form action = "store-edit.php" method = "post">';
             echo '<input type = "hidden" name="store_id" value = "',$row['store_id'],'">';

@@ -1,9 +1,6 @@
-<?php
-    require 'db-connect.php'
-?>
-
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>店舗情報登録</title>
@@ -14,24 +11,26 @@
             margin: 20px;
             background-color: #f8f8f8;
             color: #333;
+            text-align: center; /* Center text in the body */
         }
 
-        p {
-            font-size: 18px;
-            color: #4CAF50;
+        h1 {
+            font-size: 24px;
+            color: #ac1874;
             margin-bottom: 20px;
         }
 
         form {
             margin-top: 20px;
-            max-width: 400px; /* Set a maximum width for better readability */
+            max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            text-align: left; /* Align form elements to the left */
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: bold;
         }
 
@@ -40,18 +39,15 @@
             margin-bottom: 15px;
             width: 100%;
             box-sizing: border-box;
-            border: 1px solid #ccc; /* Add a border for better visibility */
+            border: 1px solid #ccc;
             border-radius: 4px;
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #af4c82;
             color: white;
             border: none;
             padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
             font-size: 14px;
             border-radius: 3px;
             cursor: pointer;
@@ -63,10 +59,17 @@
 
         .back-button {
             margin-top: 10px;
+            text-align: left;
         }
 
         .back-button button {
-            background-color: #3498db;
+            background-color: #af4c82;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
         }
 
         .back-button button:hover {
@@ -74,17 +77,30 @@
         }
     </style>
 </head>
-<body>  
-    <p>店舗情報を追加します</p>
+
+<body>
+    <h1>店舗情報を追加します</h1>
     <form action="store-insert-output.php" method="post">
-        店舗番号<input type="text" name="store_id"><br>
-        店舗名<input type="text" name="name"><br>
-        カテゴリ<input type="text" name="category"><br>
-        予算目安<input type="text" name="yosan"><br>
-        <button type="submit">追加</button>
+        <label for="store_id">店舗番号</label>
+        <input type="text" id="store_id" name="store_id">
+
+        <label for="name">店舗名</label>
+        <input type="text" id="name" name="name">
+
+        <label for="category">カテゴリ</label>
+        <input type="text" id="category" name="category">
+
+        <label for="yosan">予算目安</label>
+        <input type="text" id="yosan" name="yosan">
+
+        <div style="text-align: center;"> <!-- Center the button -->
+            <button type="submit">追加</button>
+        </div>
     </form>
 
-
-    <button onclick="location.href='store-info.php'">店舗一覧へ</button>
+    <div class="back-button">
+        <button onclick="location.href='store-info.php'">店舗一覧へ</button>
+    </div>
 </body>
+
 </html>

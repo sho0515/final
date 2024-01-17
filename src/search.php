@@ -65,22 +65,22 @@ if($_POST['category']=="null"){
 }
 
 echo '<form action="search.php" method="post">
-        <select name="category">
+        カテゴリ：<select name="category">
         <option value="null" selected hidden>選択してください</option>';
             $pdo = new PDO($connect, USER, PASS);
             $stmt = $pdo->query('SELECT c_id, category FROM Category');
             while ($row = $stmt->fetch()) {
                 echo '<option value="' . $row['c_id'] . '">' . $row['category'] . '</option>';
             }
-        echo '</select>
-        予算目安:<select name="yosan">
+        echo '</select>　
+        予算目安：<select name="yosan">
             <option value="1000000" selected hidden>選択してください</option>
             <option value="1000">1,000円以内</option>
             <option value="3000">3,000円以内</option>
             <option value="5000">5,000円以内</option>
             <option value="10000">10,000円以内</option>
             <option value="10001">10,001円以上</option>
-        </select>
+        </select>　
         <button>絞り込み</button></p>
     </form>';
 
@@ -90,7 +90,7 @@ foreach($sql as $row){
     echo '<td>',$row['store_id'] ,'</td>';
     echo '<td>',$row['name'] ,'</td>';
     echo '<td>',$row['category'] ,'</td>';
-    echo '<td>',$row['yosan'],'</td>';
+    echo '<td>￥', number_format($row['yosan']), '</td>';
     echo '<tr>';
 }
 echo '</table>';

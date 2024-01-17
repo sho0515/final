@@ -17,16 +17,18 @@
         $sql->execute([$_POST['category']]);
         $category_id = $sql->fetchColumn();
         
-        if (empty($category_id)) {
-            $sql = $pdo->prepare('insert into Category(category) values(?)');
-            $sql->execute([$_POST['category']]);
         
-            $category_id = $pdo->lastInsertId();
-        }
         
         $sql = $pdo->prepare('select * from store where store_id=?');
         $sql->execute([$_POST['store_id']]);
         if (empty($sql->fetchAll())) {
+            if (empty($category_id)) {
+                $insertcategory = $pdo->prepare('insert into Category(category) values(?)');
+                $insertcategory->execute([$_POST['category']]);
+            
+                $category_id = $pdo->lastInsertId();
+            }
+
             $sql = $pdo->prepare('insert into store values(?,?,?,?)');
             $sql->execute([
                 $_POST['store_id'], $_POST['name'],
@@ -49,7 +51,7 @@
             echo '<td>',$row['store_id'],'</td>';
             echo '<td>',$row['name'],'</td>';
             echo '<td>',$row['category'],'</td>';
-            echo '<td>',$row['yosan'], '</td>';
+            echo '<td>￥', number_format($row['yosan']), '</td>';
             echo '</tr>';
             echo "\n";
         }

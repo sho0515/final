@@ -23,6 +23,7 @@
 		echo '<form action="store-edit-output.php" method="post">';
         echo '<td> ';
 		echo  $row['store_id'] ;
+		echo '<input type = "hidden" name="store_id" value = "',$row['store_id'],'">';
 		echo '</td> ';
 		echo '<td>';
 		echo '<input type="text" name="name" value="', $row['name'], '">';
@@ -31,9 +32,9 @@
 		echo '<input type="text" name="category" value="', $row['category'], '">';
 		echo '</td> ';
 		echo '<td>';
-		echo ' <input type="text" name="yosan" value="', $row['yosan'], '">';
+		echo ' <input type="number" name="yosan" value="', $row['yosan'], '">';
 		echo '</td> ';
-		echo '<td><input type="submit" value="更新"></td>';
+		echo '<td><button type="submit" value="更新">更新</button></td>';
 		echo '</form>';
         echo '</tr>';
 		echo "\n";

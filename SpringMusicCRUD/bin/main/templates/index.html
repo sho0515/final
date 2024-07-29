@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>サービスを利用したシステム</h2>
+	<form class="display-flex" th:action="@{/dbselect}" method="POST" >
+		<input type="submit" value="一覧表示" name="select">
+		<input type="submit" value="楽曲登録" name="insert">
+	</form>
+</body>
+</html>

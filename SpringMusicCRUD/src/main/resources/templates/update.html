@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Update Music</title>
+</head>
+<body>
+    <h2>楽曲リスト更新</h2>
+    <form th:action="@{/update}" method="POST">
+        <input type="hidden" name="song_id" th:value="${music.song_id}"/>
+        曲名: <input type="text" name="song_name" th:value="${music.song_name}"/>
+        歌手名: <input type="text" name="singer" th:value="${music.singer}"/>
+        <br>
+        <input type="submit" value="更新"/>
+    </form> 
+</body>
+</html>
+

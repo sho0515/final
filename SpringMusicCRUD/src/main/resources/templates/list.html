@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Insert title here</title>
+</head>
+<body>
+    <h2>一覧表示</h2>
+    <table border="1">
+        <tr>
+            <td>曲番号</td>
+            <td>曲名</td>
+            <td>歌手名</td>
+            <td>更新</td>
+            <td>削除</td>
+        </tr>
+        <tr th:each="name : ${list}">
+            <td th:text="${name.song_id}"></td>
+            <td th:text="${name.song_name}"></td>
+            <td th:text="${name.singer}"></td>
+            <td>
+                <form th:action="@{/dbselect}" method="POST">
+                    <input type="submit" value="更新" name="update">
+                    <input type="hidden" th:value="${name.song_id}" name="song_id">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/dbselect}" method="POST">
+                    <input type="submit" value="削除" name="delete">
+                    <input type="hidden" th:value="${name.song_id}" name="song_id">
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
